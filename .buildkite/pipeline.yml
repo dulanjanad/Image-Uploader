@@ -5,7 +5,11 @@ steps:
   - label: ":docker: Build Web Application"
     commands:
      - cd WebApplication
-     - sudo docker build -t dulanjananiroshann/sample-app:latest .
+     - sudo docker build -t sample-repo:v1 .
   
   - label: ":ecr: Push Image to ECR"
-    command: echo "Hello"
+    commands: 
+     - aws ecr get-login-password --region eu-west-2 | sudo docker login --username AWS --password-stdin 640024121556.dkr.ecr.eu-west-2.amazonaws.com
+     - sudo docker tag sample-repo:v1 640024121556.dkr.ecr.eu-west-2.amazonaws.com/sample-repo:v1
+     - sudo docker push 640024121556.dkr.ecr.eu-west-2.amazonaws.com/sample-repo:v1
+    key: upload_image
