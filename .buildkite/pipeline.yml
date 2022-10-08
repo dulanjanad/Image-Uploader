@@ -5,7 +5,7 @@ steps:
   - label: ":docker: Build Web Application"
     commands:
      - cd WebApplication
-     - docker build -t dulanjananiroshann/sample-app:latest .
+     - sudo docker build -t dulanjananiroshann/sample-app:latest .
   
   - label: ":ecr: Push Image to ECR"
     command: echo "Hello"
