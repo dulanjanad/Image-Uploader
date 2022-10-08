@@ -1,0 +1,21 @@
+---
+
+- hosts: workernodes
+  become: True
+  tasks:
+
+     - name: Pull Docker Image from ECR
+       shell: |
+        aws ecr get-login-password --region eu-west-2 | sudo docker login --username AWS --password-stdin 640024121556.dkr.er.eu-west-2.amazonaws.com
+        sudo docker pull 640024121556.dkr.ecr.eu-west-2.amazonaws.com/sample-repo:BUILDKITE_VERSION
+     
+     - name: Deploy Docker Image
+       docker_container:
+        name: image-upload-app
+        image: someuser/appimage
+        state: started
+        restart: yes
+        devices:
+          - "/usr/src/app/upload:/docker-mount-point"
+        ports:
+        - "127.0.0.1:8080:8080/tcp"

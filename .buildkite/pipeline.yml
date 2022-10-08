@@ -13,3 +13,12 @@ steps:
      - aws ecr get-login-password --region eu-west-2 | sudo docker login --username AWS --password-stdin 640024121556.dkr.ecr.eu-west-2.amazonaws.com
      - sudo docker push 640024121556.dkr.ecr.eu-west-2.amazonaws.com/sample-repo:$BUILDKITE_BUILD_NUMBER
     key: upload_image
+
+  - block: "Approval"
+    prompt: "Fill out the details for release"
+    fields:
+    - text: "Release Name"
+      key: "release-name"
+  
+  - label: ":Rocket: Deploy Application"
+    command: echo "sudo ansible-playbook deploy.yml"
