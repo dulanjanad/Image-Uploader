@@ -1,3 +1,11 @@
 steps:
-  - label: ":hammer: Example Script"
-    command: echo "Hello Buildkite !!"
+  - label: ":hammer: Pull Code From Git"
+    command: echo "Code Pulled From Git"
+  
+  - label: ":docker: Build Web Application"
+    commands:
+     - cd WebApplication
+     - docker build -t dulanjananiroshann/sample-app:latest .
+  
+  - label: ":push: Push Image to ECR"
+    command: echo "Hello"
