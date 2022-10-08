@@ -7,5 +7,5 @@ steps:
      - cd WebApplication
      - docker build -t dulanjananiroshann/sample-app:latest .
   
-  - label: ":push: Push Image to ECR"
+  - label: ":ecr: Push Image to ECR"
     command: echo "Hello"
